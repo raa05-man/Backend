@@ -5,9 +5,16 @@ import { connectDB } from "./db/index.js" ;
 dotenv.config({
     path: "./env"
 }) ;
-(async () => {
-    await connectDB() ;
-})() ;
+
+ await connectDB()
+ .then(()=>{
+    app.listen(process.env.PORT || 3000, ()=>{
+        console.log(`Server is Running at Port:${process.env.PORT}`);        
+    })
+ })
+ .catch((err)=>{
+    console.log("MONGODB connection failed!!",err);
+ })
 
 
 
@@ -33,4 +40,4 @@ const app = express() ;
         throw error ;
     }
  })()
-    */
+    */ 
